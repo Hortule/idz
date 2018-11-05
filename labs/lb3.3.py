@@ -1,0 +1,23 @@
+print('Введите Xbeg, Xend, Dx и Eps')
+xb = float(input('Xbeg='))
+xe = float(input('Xend='))
+dx = float(input('Dx='))
+eps = float(input('Eps='))
+print('+--------+--------+-----+')
+print('I    X   I    Y   I   N I')
+print('+--------+--------+-----+')
+xt = xb
+while xt <= xe:
+    an = xt
+    n = 0
+    y = an
+    while True:
+        k = (-1 * xt ** 2)/((2 * n + 2)*(2*n + 1))
+        an *= k
+        y += an
+        n += 1
+        if abs(an) < eps:
+            break
+    print('I{0: 7.2f} I{1: 7.3f} I{2: 4} I'.format(xt, y, n))
+    xt += dx
+print('+--------+--------+-----+')
