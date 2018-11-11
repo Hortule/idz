@@ -20,6 +20,14 @@ for i in range(0, count):
         bn = abs(mas[i])
         pos = i
 print("Numbers after biggest module: ", end=' ')
-for i in range(i, count):
-    print("{0}".format(mas[i]))
+for i in range(pos, count):
+    print("{0} ".format(mas[i]), end=' ')
+print()
 
+for i in range(0, count-1):
+    for j in range(i, count):
+        if mas[i] > mas[j]:
+            prom = mas[i]
+            mas[i] = mas[j]
+            mas[j] = prom
+print("Конечное состояние\n{0}".format(mas))
