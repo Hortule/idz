@@ -50,9 +50,20 @@ class Application(Frame):
 
         global zod
 
-        self.n += 1
+        if self.n == -1:
+            self.name_label.grid(row=0, column=0, sticky="w")
+            self.surname_label.grid(row=0, column=1, sticky="w")
+            self.zodiac_label.grid(row=0, column=2, sticky="w")
+            self.dob_lable.grid(row=0, column=3, sticky="w")
 
-        if self.n <= 8:
+            self.name_entry.grid(row=1, column=0, padx=5, pady=5)
+            self.surname_entry.grid(row=1, column=1, padx=5, pady=5)
+            self.zodiac_entry.grid(row=1, column=2, padx=5, pady=5)
+            self.dob_entry.grid(row=1, column=3, padx=5, pady=5)
+
+            self.input_button.grid(row=2, column=3, padx=5, pady=5, sticky="e")
+
+        elif self.n <= 7:
             self.name_label.grid(row=0, column=0, sticky="w")
             self.surname_label.grid(row=0, column=1, sticky="w")
             self.zodiac_label.grid(row=0, column=2, sticky="w")
@@ -88,8 +99,10 @@ class Application(Frame):
             self.file_entry.grid(row=5, column=0, padx=5, pady=5)
             self.save_button.grid(row=5, column=1, padx=5, pady=5, sticky="w")
 
-        if self.n == 8:
+        if self.n == 7:
             self.sort()
+
+        self.n += 1
 
     def write_down(self):
         global zod
@@ -99,7 +112,6 @@ class Application(Frame):
     def sort(self):
         global zod
         zn = []
-        zod.pop(0)
 
         for i in range(8):
             zn.append(int(zod[i].dob[0]) + int(zod[i].dob[1]) * 30 + int(zod[i].dob[2]) * 365)
@@ -114,20 +126,27 @@ class Application(Frame):
                     zod[j] = promzod
 
     def outp(self):
+        ind = 1
         (name, surname) = str(self.nameoutp.get()).split(' ')
         for i in range(8):
             if zod[i].name == name and zod[i].surname == surname:
+                self.info_outp_lable.grid_forget()
                 self.info_outp_lable = Label(text='{0} {1} {2} {3}.{4}.{5}'.format(zod[i].name, zod[i].surname,
                                                                                    zod[i].zodiac, zod[i].dob[0],
                                                                                    zod[i].dob[1], zod[i].dob[2]))
                 self.info_outp_lable.grid(row=4, column=1, sticky="w")
+                ind = 0
+        if ind:
+            self.info_outp_lable.grid_forget()
+            self.info_outp_lable = Label(text='Не найдено')
+            self.info_outp_lable.grid(row=4, column=1, sticky="w")
 
     def save(self):
         name = self.filename.get()
         f = open(name+'.csv', 'w')
         out = ''
+        out += 'Имя;Фамилия;Зодиак;Дата рождения;\n'
         for i in range(8):
-            out += 'Имя;Фамилия;Зодиак;Дата рождения;\n'
             out += '{0};{1};{2};{3}.{4}.{5}\n'.format(zod[i].name, zod[i].surname,
                                                       zod[i].zodiac, zod[i].dob[0],
                                                       zod[i].dob[1], zod[i].dob[2])
