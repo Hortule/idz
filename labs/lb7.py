@@ -63,7 +63,7 @@ class Application(Frame):
 
             self.input_button.grid(row=2, column=3, padx=5, pady=5, sticky="e")
 
-        elif self.n <= 7:
+        elif self.n < 7:
             self.name_label.grid(row=0, column=0, sticky="w")
             self.surname_label.grid(row=0, column=1, sticky="w")
             self.zodiac_label.grid(row=0, column=2, sticky="w")
@@ -78,6 +78,7 @@ class Application(Frame):
             self.write_down()
 
         else:
+            self.write_down()
             self.name_label.grid_forget()
             self.surname_label.grid_forget()
             self.zodiac_label.grid_forget()
@@ -127,7 +128,14 @@ class Application(Frame):
 
     def outp(self):
         ind = 1
-        (name, surname) = str(self.nameoutp.get()).split(' ')
+
+        try:
+            (name, surname) = str(self.nameoutp.get()).split(' ')
+        except:
+            self.info_outp_lable.grid_forget()
+            self.info_outp_lable = Label(text='Не найдено')
+            self.info_outp_lable.grid(row=4, column=1, sticky="w")
+
         for i in range(8):
             if zod[i].name == name and zod[i].surname == surname:
                 self.info_outp_lable.grid_forget()
