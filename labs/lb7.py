@@ -136,7 +136,6 @@ class Application(Frame):
 
 
 # main
-
 zod = []
 
 root = Tk()
