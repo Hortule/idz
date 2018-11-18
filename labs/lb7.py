@@ -131,7 +131,7 @@ class Application(Frame):
             out += '{0};{1};{2};{3}.{4}.{5}\n'.format(zod[i].name, zod[i].surname,
                                                       zod[i].zodiac, zod[i].dob[0],
                                                       zod[i].dob[1], zod[i].dob[2])
-        f.write(out);
+        f.write(out)
         f.close()
 
 
