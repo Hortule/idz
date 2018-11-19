@@ -12,7 +12,7 @@ while xt <= xe:
     n = 0
     y = an
     while True:
-        k = (-1 * xt ** 2)/((2 * n + 2)*(2*n + 1))
+        k = -(xt ** 2) / ((2*n + 2) * (2*n + 3))
         an *= k
         y += an
         n += 1
